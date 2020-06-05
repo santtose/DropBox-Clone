@@ -1,6 +1,7 @@
 # Projeto DropBox Clone
 
 Projeto desenvolvido como exemplo do Curso Completo de JavaScript na Udemy.com.
+Com Firebase Database.
 
 ## Dependências, css, etc, no arquivo bower.json
 
