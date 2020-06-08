@@ -4,6 +4,10 @@ Projeto desenvolvido como exemplo do Curso Completo de JavaScript na Udemy.com.
 
 Com Firebase Database.
 
+## Intalação dependências node_modules
+
+- npm install
+
 ## Dependências, css, etc, no arquivo bower.json
 
 - npm install -g bower
