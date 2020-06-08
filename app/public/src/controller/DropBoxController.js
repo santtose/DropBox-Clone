@@ -12,6 +12,10 @@ class DropBoxController {
         this.timeleftEL = this.snackModalEl.querySelector('.timeleft');
         this.listFilesEl = document.querySelector('#list-of-files-and-directories');
 
+        this.btnNewFolder = document.querySelector('#btn-new-folder');
+        this.btnRename = document.querySelector('#btn-rename');
+        this.btnDelete = document.querySelector('#btn-delete');
+
         this.connectFirebase();
         this.initEvents();
         this.readFiles();
@@ -33,11 +37,33 @@ class DropBoxController {
 
     }
 
+    getSelection() {
+
+        return this.listFilesEl.querySelectorAll('.selected');
+
+    }
+
     initEvents(){
 
         this.listFilesEl.addEventListener('selectionchange', e=>{
 
-            console.log('selectionchange');
+            switch (this.getSelection().length) {
+
+                case 0:
+                    this.btnDelete.style.display = 'none';
+                    this.btnRename.style.display = 'none';
+                break;
+
+                case 1:
+                    this.btnDelete.style.display = 'block';
+                    this.btnRename.style.display = 'block';
+                break;
+
+                default:
+                    this.btnDelete.style.display = 'block';
+                    this.btnRename.style.display = 'none';
+
+            }
 
         });
 
@@ -388,9 +414,7 @@ class DropBoxController {
 
     initEventsLi(li) {
 
-        li.addEventListener('click', e=>{
-
-            this.listFilesEl.dispatchEvent(this.onselectionchange);
+        li.addEventListener('click', e=>{            
 
             if (e.shiftKey) {
 
@@ -421,6 +445,7 @@ class DropBoxController {
 
                     });
 
+                    this.listFilesEl.dispatchEvent(this.onselectionchange);
                     return true;
 
                 }
@@ -438,6 +463,8 @@ class DropBoxController {
             }
 
             li.classList.toggle('selected');
+
+            this.listFilesEl.dispatchEvent(this.onselectionchange);
 
         });
 
